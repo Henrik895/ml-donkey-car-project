@@ -99,9 +99,9 @@ Images were then used to train models with different hyperparameters.
 
 The best models so far have been able to drive around the track without hitting any obstacles and stop before stop sign. The most limiting factor, when training models, has been the computing power so far, which means that we can not use all the images at the same time, but we have to choose which ones to use as the training time increases greatly as the number of images grows. It takes roughly 5-6 hours to train a model with 100K images and 25 epochs on an RTX 2060 GPU.
 
-[Video of car driving](https://drive.google.com/file/d/1e5_91DxPOrO1kGj9GawPWKugJTA5syZL/view?usp=sharing)
+[Video of the car driving](https://drive.google.com/file/d/1e5_91DxPOrO1kGj9GawPWKugJTA5syZL/view?usp=sharing)
 
-There are times where the model struggles to avoid all of the obstacles. This is caused by the position of the obstacles and the field-of-view of the camera so it is hard to do anything about it. Below are some examples of the more difficult obstacle sequences (obstacles are red dots in the pictures).
+There are times where the model struggles to avoid all of the obstacles. This is caused by the position of the obstacles, the field-of-view of the camera and the turning radius of the car. Below are some examples of the more difficult obstacle sequences (obstacles are red dots in the pictures).
 
 Example 1:  
 ![Original image](https://drive.google.com/uc?export=view&id=1P6D7GhCVy-5mUKyKT_xigtdEtFveyNcs)
