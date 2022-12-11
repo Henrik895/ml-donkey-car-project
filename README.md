@@ -79,7 +79,7 @@ Original image:
 Augmented image:  
 ![Augmented image](./readme-images/brightness1.jpg)
 
-In addition to brightness augmentation we have also created adversarial examples, which should make the model more resilient to image noise and also improve driving in the changing lighting conditions. Adversarial examples are images on which the pixels are changed in a way, which causes the model predict wrongly. In the case of model car the wrong prediction would be a wrong driving speed or a wrong driving direction. We used method that is somewhat similar to the Fast Gradient Sign Method. The approached used by us works as follows:
+In addition to brightness augmentation we have also created adversarial examples (we got the idea from a recently defended [masters thesis](https://comserv.cs.ut.ee/ati_thesis/datasheet.php?id=74730&year=2022)), which should make the model more resilient to image noise and also improve driving in the changing lighting conditions. Adversarial examples are images on which the pixels are changed in a way, which causes the model predict wrongly. In the case of model car the wrong prediction would be a wrong driving speed or a wrong driving direction. We used method that is somewhat similar to the Fast Gradient Sign Method. The approached used by us works as follows:
 - take an image and use our model to predict the car turning angle;
 - mean squared loss is calculated by using the prediction and the desired output;
 - input image gradients are calculated;
