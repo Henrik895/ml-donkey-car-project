@@ -74,10 +74,10 @@ We have collected over 100K frames so far with varying speeds, obstacle position
 We have also used augmentation techniques in order to increase the amount of pictures. The first augmentation that we have used is changing the brightness of the images. The track is located near a big window, which means that every time the lighting conditions are a little bit different, so the brightness augmentation should make the model work better in different lighting conditions.  
 
 Original image:  
-![Original image](https://drive.google.com/file/d/1s5Ax0g0dorwTYCWOAmBpnDYUd_tsc7VU/view?usp=sharing)  
+![Original image](./readme-images/brightness_original.jpg)  
 
 Augmented image:  
-![Original image](https://drive.google.com/file/d/1gR5DLJqNUl3zvHuI7QzK16RHit012Jjp/view?usp=sharing)
+![Augmented image](./readme-images/brightness1.jpg)
 
 In addition to brightness augmentation we have also created adversarial examples, which should make the model more resilient to image noise and also improve driving in the changing lighting conditions. Adversarial examples are images on which the pixels are changed in a way, which causes the model predict wrongly. In the case of model car the wrong prediction would be a wrong driving speed or a wrong driving direction. We used method that is somewhat similar to the Fast Gradient Sign Method. The approached used by us works as follows:
 - take an image and use our model to predict the car turning angle;
@@ -88,10 +88,10 @@ In addition to brightness augmentation we have also created adversarial examples
 - repeat until necessary output value is achieved;
 
 Original image:  
-![Original image](https://drive.google.com/uc?export=view&id=14n_MXkl2kgONWYECbFqNK8r5brAX9jUH)
+![Original image](./readme-images/original.jpg)  
 
 Augmented image:  
-![Original image](https://drive.google.com/uc?export=view&id=14oDz1YmxxQyet4UcejGjIZeOoBkRMhtX)
+![Augmented image](./readme-images/adversarial.jpg)
 
 Images were then used to train models with different hyperparameters.
 
@@ -104,28 +104,28 @@ The best models so far have been able to drive around the track without hitting 
 There are times where the model struggles to avoid all of the obstacles. This is caused by the position of the obstacles, the field-of-view of the camera and the turning radius of the car. Below are some examples of the more difficult obstacle sequences (obstacles are red dots in the pictures).
 
 Example 1:  
-![Original image](https://drive.google.com/uc?export=view&id=1P6D7GhCVy-5mUKyKT_xigtdEtFveyNcs)
+![Example 1](./readme-images/fail1.png)
 
 Example 2:  
-![Original image](https://drive.google.com/uc?export=view&id=1HhMLHHzRYrcEFMnG27Y_xxm805XXD3xK)
+![Example 2](./readme-images/fail2.png)
 
 Example 3:  
-![Original image](https://drive.google.com/uc?export=view&id=1UpUGxgtNinr0AcKYgMOJNdJ-uq9Tnl-Y)
+![Example 3](./readme-images/fail3.png)
 
 ## Unsolved problems
 
 There are also some unsolved problems. First, it seems that the resolution 120x160 is not good enough to detect the arrow sign, which tells the car whether it should drive left or right, early enough so that the car is able to make the turn successfully (turn radius of the car is quite poor and it can not be changed). This means that image resolution must be increased. One of the major drawbacks of changing the resolution, is the fact that the original images must be recaptured, which is very time consuming.
 
 Arrow sign left:  
-![Original image](https://drive.google.com/uc?export=view&id=1Qz7fwXTLdcEnEM55xjnJzgdnoghjfNj6)
+![Left arrow](./readme-images/arrow_sign1.jpg)
 
 Arrow sign right:  
-![Original image](https://drive.google.com/uc?export=view&id=1ZXIPDxBlQpc1wzZ-VzKuN3V6BB01553L)
+![Right arrow](./readme-images/arrow_sign2.jpg)
 
 The second issue is the fact that we have not used cropping so far, but it can be used to increase the models performance greatly. The saliency map below shows that the model focuses too much on the things that are located outside of the track. By cropping the top half of the image, it is possible to remove these distractions.
 
 Image:  
-![Original image](https://drive.google.com/uc?export=view&id=14n_MXkl2kgONWYECbFqNK8r5brAX9jUH)
+![Original image](./readme-images/original.jpg)  
 
 Saliency map:  
-![Original image](https://drive.google.com/uc?export=view&id=1RKa0dzV2gKZcpNXe1Bz6ZYa1AtnRNLqN)
+![Saliency map](./readme-images/saliency.PNG)
