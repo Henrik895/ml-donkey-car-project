@@ -1,0 +1,1 @@
+For the adversarial, the manifest files need to be manually copied to the desired folder.
