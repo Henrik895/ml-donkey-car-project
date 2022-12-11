@@ -106,6 +106,8 @@ There are times where the model struggles to avoid all of the obstacles. This is
 Example 1:  
 ![Example 1](./readme-images/fail1.png)
 
+Also video example of the situation described above: [Video of example 1](https://drive.google.com/file/d/1uclQEHKjTmWkC09ThNpb38wZo-fYlblL/view?usp=sharing)
+
 Example 2:  
 ![Example 2](./readme-images/fail2.png)
 
