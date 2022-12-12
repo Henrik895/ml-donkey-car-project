@@ -93,7 +93,7 @@ Original image:
 Augmented image:  
 ![Augmented image](./readme-images/adversarial.jpg)
 
-Images were then used to train models with different hyperparameters.
+Images were then used to train models with different hyperparameters. We also tried categorial approach instead of regression, but this did not work very well because it made the car drive very unsmoothly (constantly correcting its turning radius, even on a straight).
 
 ## Results
 
