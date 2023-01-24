@@ -1,0 +1,75 @@
+________             ______                   _________              
+___  __ \_______________  /___________  __    __  ____/_____ ________
+__  / / /  __ \_  __ \_  //_/  _ \_  / / /    _  /    _  __ `/_  ___/
+_  /_/ // /_/ /  / / /  ,<  /  __/  /_/ /     / /___  / /_/ /_  /    
+/_____/ \____//_/ /_//_/|_| \___/_\__, /      \____/  \__,_/ /_/     
+                                 /____/                              
+
+using donkey v4.2.0 ...
+loading config file: /home/pi/mycar/config.py
+loading personal config over-rides from myconfig.py
+cfg.CAMERA_TYPE PICAM
+PiCamera loaded.. .warming camera
+Adding part PiCamera.
+Starting Donkey Server...... you can now go to donkey-223.local:8887 to drive your car.
+Adding part LocalWebController.
+Adding part ThrottleFilter.
+Adding part PilotCondition.
+Adding part RecordTracker.
+Adding part DriveMode.
+Adding part AiLaunch.
+Adding part AiRunCondition.
+Adding part RoboHATDriver.
+Created a new datastore at /home/pi/mycar/data/tub_2_23-01-19
+Adding part TubWriter.
+You can now go to <your hostname.local>:8887 to drive your car.
+Starting vehicle at 20 Hz
+New client connected
+New client connected
+New client connected
+recorded 10 records
+recorded 20 records
+recorded 30 records
+recorded 40 records
+recorded 50 records
+recorded 60 records
+recorded 70 records
+recorded 80 records
+recorded 90 records
+recorded 100 records
+recorded 110 records
+recorded 120 records
+recorded 130 records
+recorded 140 records
+recorded 150 records
+recorded 160 records
+recorded 170 records
+recorded 180 records
+recorded 190 records
+recorded 200 records
+recorded 210 records
+recorded 220 records
+recorded 230 records
+recorded 240 records
+recorded 250 records
+recorded 260 records
+recorded 270 records
+recorded 280 records
+Shutting down vehicle and its parts...
+Stopping PiCamera
+New client connected
+Part Profile Summary: (times in ms)
++--------------------+-------+------+------+------+------+------+-------+
+|        part        |  max  | min  | avg  | 50%  | 90%  | 99%  | 99.9% |
++--------------------+-------+------+------+------+------+------+-------+
+|      PiCamera      |  0.30 | 0.02 | 0.04 | 0.03 | 0.04 | 0.07 |  0.21 |
+| LocalWebController |  0.40 | 0.03 | 0.05 | 0.05 | 0.06 | 0.13 |  0.33 |
+|   ThrottleFilter   |  0.26 | 0.01 | 0.02 | 0.02 | 0.02 | 0.04 |  0.15 |
+|   PilotCondition   |  0.27 | 0.01 | 0.02 | 0.02 | 0.02 | 0.03 |  0.06 |
+|   RecordTracker    |  2.91 | 0.01 | 0.03 | 0.02 | 0.02 | 0.06 |  1.19 |
+|     DriveMode      |  0.24 | 0.01 | 0.03 | 0.03 | 0.03 | 0.05 |  0.08 |
+|      AiLaunch      |  0.10 | 0.01 | 0.02 | 0.02 | 0.02 | 0.03 |  0.07 |
+|   AiRunCondition   |  0.13 | 0.01 | 0.02 | 0.02 | 0.02 | 0.04 |  0.09 |
+|   RoboHATDriver    |  3.39 | 0.10 | 0.29 | 0.16 | 0.56 | 1.97 |  2.54 |
+|     TubWriter      | 10.14 | 1.94 | 3.80 | 3.35 | 5.60 | 7.35 | 10.02 |
++--------------------+-------+------+------+------+------+------+-------+
