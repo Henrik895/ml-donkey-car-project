@@ -69,14 +69,14 @@ class Vehicle:
         self.profiler = PartProfiler()
         # Added
         self.has2stop = False
-        self.cumulativeThrottle = 0
         self.throttleCounter = 0
         self.reverse = False
         self.reverseCounter = 0
         self.previous = 0
         self.models = ['PK','STOP','YK','ARROW']
         self.tick = 3
-        self.maxspeed = 0.71
+        self.maxspeed = 0.8
+        self.maxspeed2 = [0.8,0.81,0.825,0.85,0.87,0.88]
         self.arrow = False
         self.arrow_sign = None
         self.arrow_sign_counter = 12
@@ -85,6 +85,9 @@ class Vehicle:
         self.cumulative_left = 0
         self.started = False
         self.started_counter = 5
+        self.stopped_previously = False
+        self.counter = 0
+        self.maxspeed_counter = 0
 
     def add(self, part, inputs=[], outputs=[],
             threaded=False, run_condition=None, add_beginning=False):
@@ -242,6 +245,7 @@ class Vehicle:
                         self.reverseCounter -= 1
                         if self.reverseCounter == 0:
                             self.reverse = False
+                            self.stopped_previously = True
                         self.mem.put(entry['outputs'], outputs)
                         continue
                     run_condition = "run_pilot"
@@ -319,7 +323,6 @@ class Vehicle:
                                 self.tick = (self.tick+1)%3
                             self.previous = outputs[0]
                             if outputs[1] < 0.20 and self.started:
-                                self.cumulativeThrottle += outputs[1]
                                 self.throttleCounter += 1
                                 if self.throttleCounter >= 12: #This value needs to be tuned
                                     self.reverse = True
@@ -331,7 +334,6 @@ class Vehicle:
                                         self.started_counter -= 1
                                     else:
                                         self.started = True
-                                self.cumulativeThrottle = 0
                                 self.throttleCounter = np.maximum(0,self.throttleCounter - 3)
                         else:
                             if outputs[1] > 0.5: #If extra model detected stopping condition
@@ -341,6 +343,7 @@ class Vehicle:
                         if model_type == 'SD':
                             #If we need to stop then set throttle to zero.
                             outputs = (self.previous,0)
+                            self.stopped_previously = True
                             # If the self.has2stop == True then set it to False for next frame.
                             self.has2stop = False
                     # save the output to memory
@@ -351,13 +354,24 @@ class Vehicle:
                 
                 #Run only for "SD" model
                 if outputs is not None and model_type not in ['PK', 'YK', 'STOP', 'ARROW']:
-                    if model_type != "other":
+                    if model_type == "SD":
+                        self.counter += 1
+                        print(self.counter)
+                        if self.counter % 100 == 0:
+                            print("Changing counter")
+                            if self.counter <= 400:
+                                self.maxspeed_counter += 1
+                            self.maxspeed = self.maxspeed2[self.maxspeed_counter]
                         #outputs = (outputs[0], -1*outputs[1])
                         if outputs[1] > 0.2:
                             #self.maxspeed += 0.0005
-                            outputs = (outputs[0], 0.8)#np.minimum(outputs[1]*1.1, 0.825))
+                            if self.stopped_previously:
+                                self.stopped_previously = False
+                                outputs = (outputs[0], 1)
+                            else:
+                                outputs = (outputs[0], self.maxspeed)#np.minimum(outputs[1]*1.1, 0.825))
                             #outputs = (outputs[0],np.minimum(np.minimum(outputs[1],self.maxspeed),0.75))
-                        if outputs[1] < -0.1: #If model predicts negative value (wants to reverse) then set throttle to -1.0
+                        elif outputs[1] < -0.1: #If model predicts negative value (wants to reverse) then set throttle to -1.0
                             outputs = (0,-1.0)
                         if outputs[0] > 0.3: #If model turns right then increase throttle
                             outputs = (outputs[0],outputs[1]*1.05)
@@ -365,9 +379,9 @@ class Vehicle:
                             outputs = (0,0)
                         elif self.arrow_sign != None and self.arrow_sign_counter > 0: #If arrow sign was detected then notch the car in given direction
                             if self.arrow_sign > 0:
-                                outputs = (np.maximum(outputs[0],-1*outputs[0]) +0.1,outputs[1])
+                                outputs = (outputs[0]+0.1,outputs[1])
                             else:
-                                outputs = (np.minimum(outputs[0],-1*outputs[0]) -0.1,outputs[1])
+                                outputs = (outputs[0]-0.1,outputs[1])
                             self.arrow_sign_counter -= 1
                     self.mem.put(entry['outputs'], outputs)
                 # finish timing part run
